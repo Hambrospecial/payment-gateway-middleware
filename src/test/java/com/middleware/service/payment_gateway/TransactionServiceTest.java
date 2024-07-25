@@ -3,7 +3,7 @@ package com.middleware.service.payment_gateway;
 import com.middleware.service.payment_gateway.dtos.TransactionRequest;
 import com.middleware.service.payment_gateway.dtos.TransactionResponse;
 import com.middleware.service.payment_gateway.enums.TransactionStatus;
-import com.middleware.service.payment_gateway.exception.TransactionNotFoundException;
+import com.middleware.service.payment_gateway.exception.NotFoundException;
 import com.middleware.service.payment_gateway.model.Transaction;
 import com.middleware.service.payment_gateway.repository.TransactionRepository;
 import com.middleware.service.payment_gateway.service.TransactionService;
@@ -91,6 +91,6 @@ class TransactionServiceTest {
         when(transactionRepository.findByTransRef(transRef)).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(TransactionNotFoundException.class, () -> transactionService.getTransaction(transRef));
+        assertThrows(NotFoundException.class, () -> transactionService.getTransaction(transRef));
     }
 }

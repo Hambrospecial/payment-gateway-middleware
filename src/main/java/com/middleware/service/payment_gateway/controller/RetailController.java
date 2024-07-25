@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/retail")
 @RequiredArgsConstructor
-@Tag(name = "Retail", description = "Retail API for initiating transactions")
+@Tag(name = "Retail", description = "Retail APIs for initiating transactions")
 public class RetailController {
 
     private final TransactionService transactionService;

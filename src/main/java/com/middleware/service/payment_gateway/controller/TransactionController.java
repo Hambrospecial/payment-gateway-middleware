@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/transactions")
 @RequiredArgsConstructor
 @Slf4j
-@Tag(name = "Transactions", description = "Transaction management API")
+@Tag(name = "Transactions", description = "Transaction APIs for initiating Payment")
 public class TransactionController {
 
     private final TransactionService transactionService;

@@ -1,11 +1,11 @@
 package com.middleware.service.payment_gateway.repository;
 
-import com.middleware.service.payment_gateway.model.AppUser;
+import com.middleware.service.payment_gateway.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<AppUser, Long> {
-    Optional<AppUser> findByUsername(String username);
-    Optional<AppUser> findByEmail(String username);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+    Optional<User> findByEmail(String username);
 }

@@ -36,7 +36,7 @@ public class SecurityConfig {
     private String jwtIssuer;
     private static final String[] WHITE_LIST_URL = {"/swagger-resources", "/swagger-resources/**", "/configuration/ui",
             "/configuration/security", "/swagger-ui/**", "/webjars/**", "/swagger-ui.html", "/h2-console/**",
-            "/swagger-ui.html/**", "/api-docs/**", "/favicon.ico", "/api/v1/auth/**", "api/v1/transactions/webhook"};
+            "/swagger-ui.html/**", "/api-docs/**", "/favicon.ico", "/api/v1/users/login", "api/v1/transactions/webhook"};
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final CustomUserDetailsService customUserDetailsService;

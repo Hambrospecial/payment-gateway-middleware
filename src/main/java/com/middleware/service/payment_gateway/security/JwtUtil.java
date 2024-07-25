@@ -1,6 +1,6 @@
 package com.middleware.service.payment_gateway.security;
 
-import com.middleware.service.payment_gateway.model.AppUser;
+import com.middleware.service.payment_gateway.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -32,10 +32,10 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String createJwtToken(AppUser appUser) {
+    public String createJwtToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("role", appUser.getRole());
-        return createToken(claims, appUser.getUsername());
+        claims.put("role", user.getRoles());
+        return createToken(claims, user.getUsername());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {

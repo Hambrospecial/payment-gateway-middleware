@@ -4,7 +4,7 @@ import com.middleware.service.payment_gateway.dtos.TransactionRequest;
 import com.middleware.service.payment_gateway.dtos.TransactionResponse;
 import com.middleware.service.payment_gateway.dtos.WebhookNotification;
 import com.middleware.service.payment_gateway.enums.TransactionStatus;
-import com.middleware.service.payment_gateway.exception.TransactionNotFoundException;
+import com.middleware.service.payment_gateway.exception.NotFoundException;
 import com.middleware.service.payment_gateway.model.Transaction;
 import com.middleware.service.payment_gateway.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class TransactionService {
 
     public TransactionResponse getTransaction(String transRef) {
         Transaction transaction = transactionRepository.findByTransRef(transRef)
-                .orElseThrow(() -> new TransactionNotFoundException("Transaction not found with reference: " + transRef));
+                .orElseThrow(() -> new NotFoundException("Transaction not found with reference: " + transRef));
         return modelMapper.map(transaction, TransactionResponse.class);
     }
 
@@ -54,7 +53,7 @@ public class TransactionService {
         try {
             log.info("Processing webhook notification: {}", notification);
             Transaction transaction = transactionRepository.findByTransRef(notification.getTransRef())
-                    .orElseThrow(() -> new TransactionNotFoundException("Transaction not found: " + notification.getTransRef()));
+                    .orElseThrow(() -> new NotFoundException("Transaction not found: " + notification.getTransRef()));
             transaction.setStatus(notification.getStatus());
             transactionRepository.save(transaction);
             log.info("Transaction status updated via webhook: {} - {}", notification.getTransRef(), notification.getStatus());

@@ -1,6 +1,8 @@
 package com.middleware.service.payment_gateway.security;
 
+import com.middleware.service.payment_gateway.exception.InvalidCredentialsException;
 import com.middleware.service.payment_gateway.service.CustomUserDetailsService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,6 +46,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 );
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+            }else {
+                throw new InvalidCredentialsException("Token Expired");
             }
         }
         filterChain.doFilter(request, response);
