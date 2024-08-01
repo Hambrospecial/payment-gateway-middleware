@@ -2,8 +2,6 @@ package com.middleware.service.payment_gateway.controller;
 
 import com.middleware.service.payment_gateway.dtos.Response;
 import com.middleware.service.payment_gateway.dtos.RoleRequest;
-import com.middleware.service.payment_gateway.dtos.UserRequest;
-import com.middleware.service.payment_gateway.repository.RoleRepository;
 import com.middleware.service.payment_gateway.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

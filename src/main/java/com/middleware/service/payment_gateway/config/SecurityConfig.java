@@ -46,8 +46,8 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
-                .authorizeHttpRequests(req -> req.requestMatchers(WHITE_LIST_URL)
-                                .permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(
+                        request -> request.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(customUserDetailsService)
