@@ -46,8 +46,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
-                .authorizeHttpRequests(
-                        request -> request.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(request -> request.requestMatchers(WHITE_LIST_URL).permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .userDetailsService(customUserDetailsService)
@@ -56,7 +55,8 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder(){
-        return NimbusJwtDecoder.withSecretKey(new SecretKeySpec(jwtSecretKey.getBytes(), "HmacSHA256"))
+        return NimbusJwtDecoder
+                .withSecretKey(new SecretKeySpec(jwtSecretKey.getBytes(), "HmacSHA256"))
                 .macAlgorithm(MacAlgorithm.HS256)
                 .build();
     }
